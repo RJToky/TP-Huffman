@@ -15,8 +15,8 @@ def main():
     # for symbole in huffman:
     #     print(f"Symbole: {symbole.label} - Code: {symbole.code}")
 
-    # compress("./file/genesis.txt", "./bin/genesis.bin", "./source/genesis.pkl")
-    decompress("./bin/genesis.bin", "./file/genesis.txt", "./source/genesis.pkl")
+    compress("./file/genesis.txt", "./bin/genesis.bin", "./source/genesis.pkl")
+    # decompress("./bin/genesis.bin", "./file/genesis.txt", "./source/genesis.pkl")
     pass
 
 if __name__ == "__main__":
