@@ -1,3 +1,5 @@
+import math
+
 class Symbole:
     def __init__(self, label, proba, left_previous, right_previous, left_arete, right_arete, code) -> None:
         self.label = label
@@ -73,4 +75,32 @@ class Source:
         tree = tree.set_arete()
         tree = tree.set_code()
         leaves = tree.get_leaves()
+
+        q = 2
+        # print("Proba = ", Source.total_proba(leaves))
+        print("H(S) = ", Source.entropie(leaves) / math.log(q, 2))
+        print("NC = ", Source.nc(leaves))
+        print("H(S) + 1 = ", (Source.entropie(leaves) / math.log(q, 2)) + 1)
+
         return leaves
+
+    @staticmethod
+    def entropie(symboles):
+        rep = 0
+        for symbole in symboles:
+            rep += symbole.proba * math.log(symbole.proba, 2)
+        return -1 * rep
+    
+    @staticmethod
+    def nc(symboles):
+        rep = 0
+        for symbole in symboles:
+            rep += symbole.proba * len(symbole.code)
+        return rep
+    
+    @staticmethod
+    def total_proba(symboles):
+        rep = 0
+        for symbole in symboles:
+            rep += symbole.proba
+        return rep

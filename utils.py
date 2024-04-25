@@ -25,6 +25,10 @@ def read_bytes(file_path):
     with open(file_path, 'rb') as f:
         return bin(int.from_bytes(f.read(), byteorder='big'))[2:]
 
+def format_8(binary):
+    write_file('nombre.txt', str(8 - len(binary) % 8))
+    return binary + ('0' * (8 - len(binary) % 8))
+
 def calculate_proba(text):
     probas = {}
     for char in text:
@@ -58,18 +62,22 @@ def code_huffman(text, source_code_path):
     binary = ''
     for char in text:
         binary += next(symbole.code for symbole in huffman if symbole.label == char)
+    # print("Binary initial : ", len(binary))
     return binary
 
 def compress(input_file_path, output_file_path, source_code_path):
     text = read_file(input_file_path)
     binary = code_huffman(text, source_code_path)
-    write_bytes(output_file_path, binary)
+    # print("Binary final : ", len(format_8(binary)))
+    write_bytes(output_file_path, format_8(binary))
 
 def decode_huffman(binary, source_code_path):
     huffman = read_source_code(source_code_path)
+    nombre = read_file('nombre.txt')
+    print("Nombre 0 = ", nombre)
     text = ''
     test_code = ''
-    for i in range(len(binary)):
+    for i in range(len(binary) - (int(nombre))):
         test_code += binary[i]
         for symbole in huffman:
             if test_code == symbole.code:

@@ -15,7 +15,7 @@ def main():
     # for symbole in huffman:
     #     print(f"Symbole: {symbole.label} - Code: {symbole.code}")
 
-    compress("./file/genesis.txt", "./bin/genesis.bin", "./source/genesis.pkl")
+    compress("./file/alea.txt", "./bin/alea.bin", "./source/alea.pkl")
     # decompress("./bin/genesis.bin", "./file/genesis.txt", "./source/genesis.pkl")
     pass
 
